@@ -6,7 +6,14 @@ For iPods with photo support: iPod Photo (4G), iPod Video (5G/5.5G), iPod Classi
 
 ## Run it
 
-Put the iPod in disk mode so it mounts as a drive (see [below](#disk-mode)), then:
+### 1. Put the iPod in disk mode
+
+1. Connect the iPod to your computer with its USB cable. If it shows up as a drive, it is already in disk mode. Go to step 2.
+2. If not, set the **Hold** switch on, then off.
+3. Hold **Select** (centre button) and **Menu** for about 6 seconds, until the Apple logo shows.
+4. At once, hold **Select** and **Play/Pause** until the screen says **Disk Mode**.
+
+### 2. Extract the photos
 
 ```bash
 python3 ipod_photo_extractor.py                                          # auto-detect (macOS)
@@ -60,7 +67,7 @@ The `F####` prefix of an `.ithmb` file sets its format.
 
 Smaller thumbnail and cover-art formats are listed in `PROFILES` in the script.
 
-## What will bite you
+## Stuff to know
 
 - **Formats are not all checked on real devices.** The table comes from the profile definitions in the script. If a photo has wrong colours or shifted rows, open an issue with your iPod model and the `F####` prefixes in `Photos/Thumbs`.
 - **Cropping follows the database.** The crop uses the padding and size stored in the `Photo Database`. Tests cover it with synthetic data only. If a photo is cut off, run with `--no-crop` and open an issue.
@@ -74,13 +81,6 @@ python3 -m unittest
 ```
 
 The tests build small fake `.ithmb` files and a fake `Photo Database`. No photos are in the repo. Tested with Python 3.11.
-
-## Disk mode
-
-1. Connect the iPod to your computer with its USB cable. If it shows up as a drive, it is already in disk mode.
-2. If not, set the **Hold** switch on, then off.
-3. Hold **Select** (centre button) and **Menu** for about 6 seconds, until the Apple logo shows.
-4. At once, hold **Select** and **Play/Pause** until the screen says **Disk Mode**.
 
 ## License
 
