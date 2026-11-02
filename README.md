@@ -6,6 +6,8 @@ For iPods with photo support: iPod Photo (4G), iPod Video (5G/5.5G), iPod Classi
 
 ## Run it
 
+These steps are for a Mac. You need the iPod's USB cable and Python 3. You do not need a GitHub account or any knowledge of Git.
+
 ### 1. Put the iPod in disk mode
 
 1. Connect the iPod to your computer with its USB cable. If it shows up as a drive, it is already in disk mode. Go to step 2.
@@ -13,15 +15,40 @@ For iPods with photo support: iPod Photo (4G), iPod Video (5G/5.5G), iPod Classi
 3. Hold **Select** (centre button) and **Menu** for about 6 seconds, until the Apple logo shows.
 4. At once, hold **Select** and **Play/Pause** until the screen says **Disk Mode**.
 
-### 2. Extract the photos
+### 2. Get the script and run it
+
+Open Terminal. It is in the Utilities folder inside Applications. Paste these two lines and press Return:
 
 ```bash
-python3 ipod_photo_extractor.py                                          # auto-detect (macOS)
-python3 ipod_photo_extractor.py /Volumes/IPOD -o ~/Desktop/ipod-photos   # explicit mount point
-python3 ipod_photo_extractor.py ./backup -o out                          # a copied folder
+curl -O https://raw.githubusercontent.com/theflyingcoders/ipod-image-extractor/main/ipod_photo_extractor.py
+python3 ipod_photo_extractor.py
 ```
 
-The path can also be a copy of the iPod's contents: a folder that holds `Photos/`, or one that holds the `.ithmb` files and `Photo Database` directly.
+The first line downloads the script into the folder Terminal opened in, which is your home folder. The second line runs it. If a window asks you to install the command line developer tools, click Install, wait for it to finish, then run the second line again.
+
+### 3. Find your photos
+
+Open the `extracted_photos` folder in your home folder.
+
+### Download the file by hand instead
+
+Click `ipod_photo_extractor.py` in the file list at the top of this page. Click the download icon at the top right of the file. Your browser saves it to your Downloads folder. In Terminal, run:
+
+```bash
+cd ~/Downloads
+python3 ipod_photo_extractor.py
+```
+
+The results are in `~/Downloads/extracted_photos`.
+
+### Other ways to run it
+
+```bash
+python3 ipod_photo_extractor.py /Volumes/IPOD -o ~/Desktop/ipod-photos   # name the iPod and the results folder
+python3 ipod_photo_extractor.py ./backup -o out                          # a folder you copied from the iPod
+```
+
+The path can be a copy of the iPod's contents: a folder that holds `Photos/`, or one that holds the `.ithmb` files and `Photo Database` directly.
 
 With no path, the script uses the current folder if it contains `Photos`, `Photo Database` or `.ithmb` files. Otherwise it looks in `/Volumes` for a volume with a `Photos` or `iPod_Control` folder. That second step works on macOS only. On other systems, pass the path. If it finds several volumes, it prints one command for each.
 
